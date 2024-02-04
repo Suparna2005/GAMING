@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+        /* Add your CSS styling here */
+    </style>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors Game</h1>
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissor">Scissors</button>
+    <p class="movesleft">Moves Left: 10</p>
+    <p class="result"></p>
+    <script>
+        const game = () => {
+            let playerScore = 0;
+            let computerScore = 0;
+            let moves = 0;
+
+            const playGame = () => {
+                const rockBtn = document.querySelector('.rock');
+                const paperBtn = document.querySelector('.paper');
+                const scissorBtn = document.querySelector('.scissor');
+                const playerOptions = [rockBtn, paperBtn, scissorBtn];
+                const computerOptions = ['rock', 'paper', 'scissors'];
+
+                playerOptions.forEach(option => {
+                    option.addEventListener('click', function () {
+                        const movesLeft = document.querySelector('.movesleft');
+                        moves++;
+                        movesLeft.innerText = `Moves Left: ${10 - moves}`;
+
+                        const choiceNumber = Math.floor(Math.random() * 3);
+                        const computerChoice = computerOptions[choiceNumber];
+
+                        winner(this.innerText, computerChoice);
+
+                        if (moves === 10) {
+                            gameOver(playerOptions, movesLeft);
+                        }
+                    });
+                });
+            };
+
+            const winner = (player, computer) => {
+                const result = document.querySelector('.result');
+                const playerScoreBoard = document.querySelector('.p-count');
+                const computerScoreBoard = document.querySelector('.c-count');
+
+                player = player.toLowerCase();
+                computer = computer.toLowerCase();
+
+                // Implement your game logic here (compare player and computer choices)
+                // Update playerScore and computerScore accordingly
+                // Display the result in the 'result' paragraph
+
+                // Example:
+                if (player === computer) {
+                    result.innerText = "It's a draw!";
+                } else if (
+                    (player === 'rock' && computer === 'scissors') ||
+                    (player === 'paper' && computer === 'rock') ||
+                    (player === 'scissors' && computer === 'paper')
+                ) {
+                    playerScore++;
+                    result.innerText = `You win!`;
+                } else {
+                    computerScore++;
+                    result.innerText = `Computer wins!`;
+                }
+
+                // Update playerScoreBoard and computerScoreBoard
+                // Display the final scores
+            };
+
+            const gameOver = (playerOptions, movesLeft) => {
+                // Display the final result with a reload button
+                // You can reset the game here
+            };
+
+            playGame();
+        };
+
+        game();
+    </script>
+</body>
+</html>
